@@ -7,7 +7,7 @@ import socket
 
 class MyRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
     def do_GET(self):
-        if self.path == "/pi_remote/discover":
+        if self.path == "/pi_remote/discover.json":
           self._success_response()
           response = {"hostname":socket.gethostname()}
           json.dump(JsonResponseFormatter.success_with_data(response), self.wfile) 
@@ -17,12 +17,12 @@ class MyRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
     
     def _success_response(self):  
         self.send_response(200)
-        self.send_header("Content-type:", "application/json")
+        self.send_header("Content-type", "application/json")
         self.wfile.write("\n")
     
     def _failure_response(self):  
         self.send_response(404)
-        self.send_header("Content-type:", "application/json")
+        self.send_header("Content-type", "application/json")
         self.wfile.write("\n")
 
 class JsonResponseFormatter:
