@@ -7,7 +7,7 @@ import socket
 
 class MyRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
     def do_GET(self):
-        if self.path == "/pi_remote/autodiscover":
+        if self.path == "/pi_remote/discover":
           self._success_response()
           response = {"hostname":socket.gethostname()}
           json.dump(JsonResponseFormatter.success_with_data(response), self.wfile) 
